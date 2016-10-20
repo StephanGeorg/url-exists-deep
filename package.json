@@ -1,6 +1,6 @@
 {
   "name": "url-exists-deep",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A deeper node library to determine if a url exists.",
   "main": "index.js",
   "scripts": {
