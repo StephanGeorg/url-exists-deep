@@ -13,16 +13,13 @@ request with User-Agent and Accept header is sent.
 var urlExists = require('url-exists-deep');
 var url = 'https://www.google.com';
 urlExists(url)
-  .then(function(res){
-
+  .then(function(response){
     if (response) {
-      console.log("Url exists", res.href);
+      console.log("Url exists", response.href);
     } else {
       console.log("Url does not exists!");
     }
-
   });
-
 ```
 
 Makes a deeper determination if a url exists or not. To reduce false negative
