@@ -1,16 +1,18 @@
 const request = require('request');
 
-function urlExistsDeep(url, header, method, timeout) {
-  return new Promise((resolve) => {
+const urlExistsDeep = (url, header = {}, method = 'HEAD', timeout = 5000, pool = {}) =>
+  new Promise((resolve, reject) => {
+    let headers = header;
     request({
       url,
-      method: method || 'HEAD',
-      headers: header || {},
+      method,
+      headers,
       followRedirect: false,
-      timeout: timeout || 5000,
+      timeout,
+      pool,
     }, (err, res) => {
-      if (!res || err) {
-        resolve(false);
+      if (err) {
+        reject(err);
         return;
       }
 
@@ -23,18 +25,18 @@ function urlExistsDeep(url, header, method, timeout) {
 
       if (res.statusCode === 403) {
         checkUrl = res.request.uri.href;
-        header = { 'Accept': 'text/html', 'User-Agent': 'Mozilla/5.0' };
+        headers = { Accept: 'text/html', 'User-Agent': 'Mozilla/5.0' };
         method = 'GET';
       } else if (res.statusCode === 301) {
         checkUrl = res.headers.location;
       }
 
       if (checkUrl) {
-        urlExistsDeep(checkUrl, header, method)
-          .then(resolve);
+        urlExistsDeep(checkUrl, headers, method, pool)
+          .then(resolve)
+          .catch(reject);
       } else resolve(res.request.uri);
     });
   });
-}
 
 module.exports = urlExistsDeep;
