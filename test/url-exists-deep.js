@@ -43,7 +43,7 @@ describe('Make deep analyze of URL', function() {
       url = 'http://targobank.de';
       urlExistsDeep(url)
         .then(function(res) {
-          //res.should.be.false;
+            res.should.have.property('href', 'https://www.targobank.de/');
           done();
           //console.log("Response for", url, res.href);
         })
@@ -60,13 +60,13 @@ describe('Make deep analyze of URL', function() {
       url = 'http://thisisawrongurltotest.com';
       urlExistsDeep(url)
         .then(function(res) {
-          res.should.be.false;
-          done();
+          //res.should.be.false;
+          //done();
           // console.log("Response for", url, res);
         })
         .catch(function(error) {
-          //error.should.be.false;
-          //done();
+          error.should.be.false;
+          done();
           // console.log("Response for", url, error);
         });
 

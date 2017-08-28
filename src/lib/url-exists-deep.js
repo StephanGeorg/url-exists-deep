@@ -28,11 +28,13 @@ const urlExistsDeep = (url, header = {}, method = 'HEAD', timeout = 5000, pool =
         headers = { Accept: 'text/html', 'User-Agent': 'Mozilla/5.0' };
         method = 'GET';
       } else if (res.statusCode === 301) {
-        checkUrl = res.headers.location;
+        if (!res.headers.location.includes('://')) {
+          checkUrl = res.request.uri.protocol + '//' + res.request.uri.host + res.headers.location;
+        } else checkUrl = res.headers.location;
       }
 
       if (checkUrl) {
-        urlExistsDeep(checkUrl, headers, method, pool)
+        urlExistsDeep(checkUrl, headers, method, timeout, pool)
           .then(resolve)
           .catch(reject);
       } else resolve(res.request.uri);
