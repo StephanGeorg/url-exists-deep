@@ -1,6 +1,6 @@
 const request = require('request');
 
-const urlExistsDeep = (url, header = {}, method = 'HEAD', timeout = 5000, pool = {}) =>
+const urlExistsDeep = (url, header = {}, method = 'HEAD', timeout = 5000, pool = {}, prevStatus = 0) =>
   new Promise((resolve, reject) => {
     let headers = header;
     request({
@@ -17,13 +17,16 @@ const urlExistsDeep = (url, header = {}, method = 'HEAD', timeout = 5000, pool =
       }
 
       let checkUrl;
-
       if (/4\d\d/.test(res.statusCode) && res.statusCode !== 403) {
         resolve(false);
         return;
       }
 
       if (res.statusCode === 403) {
+        if (prevStatus === 403) {
+          resolve(false);
+          return;
+        }
         checkUrl = res.request.uri.href;
         headers = { Accept: 'text/html', 'User-Agent': 'Mozilla/5.0' };
         method = 'GET';
@@ -34,7 +37,7 @@ const urlExistsDeep = (url, header = {}, method = 'HEAD', timeout = 5000, pool =
       }
 
       if (checkUrl) {
-        urlExistsDeep(checkUrl, headers, method, timeout, pool)
+        urlExistsDeep(checkUrl, headers, method, timeout, pool, res.statusCode)
           .then(resolve)
           .catch(reject);
       } else resolve(res.request.uri);

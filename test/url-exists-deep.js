@@ -1,5 +1,5 @@
 var should = require('should');
-var urlExistsDeep = require('../dist/lib/url-exists-deep');
+var urlExistsDeep = require('../src/lib/url-exists-deep');
 
 describe('Make deep analyze of URL', function() {
 
@@ -60,11 +60,13 @@ describe('Make deep analyze of URL', function() {
       url = 'http://thisisawrongurltotest.com';
       urlExistsDeep(url)
         .then(function(res) {
-          //res.should.be.false;
-          //done();
+          // console.log('then', res);
+          // res.should.be.false;
+          // done();
           // console.log("Response for", url, res);
         })
-        .catch(function(error) {
+        .catch(function (error) {
+          // console.log('catch', error);
           error.should.be.false;
           done();
           // console.log("Response for", url, error);
@@ -72,4 +74,22 @@ describe('Make deep analyze of URL', function() {
 
     });
    });
+
+   describe('Returning false for a 403 url', function () {
+     it('should be false', function(done) {
+       url = 'https://httpstat.us/403';
+       urlExistsDeep(url)
+         .then(function(res) {
+           res.should.be.false;
+           done();
+           // console.log("Response for", url, res);
+         })
+         .catch(function(error) {
+           // error.should.be.false;
+           // done();
+           // console.log("Response for", url, error);
+         });
+
+     });
+    });
 });
