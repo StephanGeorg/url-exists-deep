@@ -1,95 +1,76 @@
-var should = require('should');
-var urlExistsDeep = require('../src/lib/url-exists-deep');
+import { expect } from 'chai';
+import urlExistsDeep from '../src/index';
 
-describe('Make deep analyze of URL', function() {
+describe('Make deep analyze of URL', () => {
+  let url = '';
 
-  var url = '';
-
-  describe('Returning a valid URL for (http://www.google.com)', function () {
-    it('should return url', function (done) {
+  describe('Returning a valid URL for (http://www.google.com)', () => {
+    it('should return url', (done) => {
       url = 'http://www.google.com';
       urlExistsDeep(url)
-        .then(function(res) {
-          // console.log("Response for", url, res.href);
-          res.should.have.property('href', 'http://www.google.com/');
+        .then((res) => {
+          expect(res).to.have.property('href').and.to.be.equal('http://www.google.com/');
           done();
-
         })
-        .catch(function(error) {
-          console.log("Error", error);
+        .catch((error) => {
+          console.log('Error', error);
           done();
         });
     });
   });
 
-  describe('Follow a redirect and return valid destination URL', function () {
-    it('should follow redirect and return url', function(done) {
+  describe('Follow a redirect and return valid destination URL', () => {
+    it('should follow redirect and return url', (done) => {
       url = 'https://goo.gl/DrBmYG';
       urlExistsDeep(url)
-        .then(function(res) {
-          // console.log("Response for", url, res.href);
-          res.should.have.property('href', 'https://github.com/StephanGeorg/url-exists-deep');
+        .then((res) => {
+          expect(res).to.have.property('href').and.to.be.equal('https://github.com/StephanGeorg/url-exists-deep');
           done();
         })
-        .catch(function(error) {
-          console.log("Error", error);
+        .catch((error) => {
+          console.log({ error });
           done();
         });
     });
   });
 
-  describe('Starting a deeper determination if URL exists', function () {
-    it('should start deeper request and return url', function(done) {
+  describe('Starting a deeper determination if URL exists', () => {
+    it('should start deeper request and return url', (done) => {
       url = 'http://targobank.de';
       urlExistsDeep(url)
-        .then(function(res) {
-            res.should.have.property('href', 'https://www.targobank.de/');
+        .then((res) => {
+          expect(res).to.have.property('href').and.to.be.equal('https://www.targobank.de/');
           done();
-          //console.log("Response for", url, res.href);
         })
-        .catch(function(error) {
-          console.log("Error", error);
+        .catch((error) => {
+          console.log({ error });
           done();
         });
-
     });
   });
 
-  describe('Returning false for non-existing domain', function () {
-    it('should be false', function(done) {
+  describe('Returning false for non-existing domain', () => {
+    it('should catch error', (done) => {
       url = 'http://thisisawrongurltotest.com';
       urlExistsDeep(url)
-        .then(function(res) {
-          // console.log('then', res);
-          // res.should.be.false;
-          // done();
+        .then((res) => {
+          expect(res).to.be.equal(false);
+          done();
+        })
+        .catch(done);
+    }).timeout(0);
+  });
+
+  describe('Returning false for a 403 url', () => {
+    it('should be false', (done) => {
+      url = 'https://httpstat.us/403';
+      urlExistsDeep(url)
+        .then((res) => {
+          expect(res).to.be.equal(false);
+          done();
           // console.log("Response for", url, res);
         })
-        .catch(function (error) {
-          // console.log('catch', error);
-          error.should.be.false;
-          done();
-          // console.log("Response for", url, error);
-        });
-
+        .catch(done);
     });
-   });
-
-   describe('Returning false for a 403 url', function () {
-     it('should be false', function(done) {
-       url = 'https://httpstat.us/403';
-       urlExistsDeep(url)
-         .then(function(res) {
-           res.should.be.false;
-           done();
-           // console.log("Response for", url, res);
-         })
-         .catch(function(error) {
-           // error.should.be.false;
-           // done();
-           // console.log("Response for", url, error);
-         });
-
-     });
-    });
+  });
 });
