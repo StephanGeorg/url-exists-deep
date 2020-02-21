@@ -1,4 +1,4 @@
-# url-exists-deep
+# url-exists-deep [![npm version](https://badge.fury.io/js/url-exists-deep.svg)](https://badge.fury.io/js/url-exists-deep)
 
 A deeper node library to determine if a url exists.
 
@@ -10,16 +10,11 @@ request with User-Agent and Accept header is sent.
 ## Usage
 
 ```javascript
-var urlExists = require('url-exists-deep');
-var url = 'https://www.google.com';
-urlExists(url)
-  .then(function(response){
-    if (response) {
-      console.log("Url exists", response.href);
-    } else {
-      console.log("Url does not exists!");
-    }
-  });
+const urlExists from 'url-exists-deep';
+const url = 'https://www.google.com';
+
+
+const exists = await urlExists(url);
 ```
 
 Makes a deeper determination if a url exists or not. To reduce false negative
