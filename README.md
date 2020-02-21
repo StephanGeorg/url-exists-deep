@@ -17,6 +17,10 @@ const url = 'https://www.google.com';
 const exists = await urlExists(url);
 ```
 
+## Result
+
+Returns ``false`` if url does not exists or ``` object ``` with url information.
+
 Makes a deeper determination if a url exists or not. To reduce false negative
 responses.
 
