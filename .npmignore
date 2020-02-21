@@ -5,3 +5,5 @@ src
 test
 README.md
 .eslintrc
+.babelrc
+LICENSE
