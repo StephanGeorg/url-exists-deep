@@ -10,11 +10,12 @@ request with User-Agent and Accept header is sent.
 ## Usage
 
 ```javascript
-const urlExists from 'url-exists-deep';
+import urlExists from 'url-exists-deep';
+
+
 const url = 'https://www.google.com';
-
-
 const exists = await urlExists(url);
+
 ```
 
 ## Result
