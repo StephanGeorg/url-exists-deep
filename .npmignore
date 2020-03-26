@@ -1,9 +1,8 @@
+LICENSE
 node_modules
 npm-debug.log
 .DS_Store
 src
 test
-README.md
 .eslintrc
 .babelrc
-LICENSE
