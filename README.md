@@ -7,16 +7,24 @@ exists or not a HEAD request is sent, because this is much faster then a GET.
 Most hosts are responding correct. If the host responses with a 403 Forbidden a GET
 request with User-Agent and Accept header is sent.  
 
+## Installation
+
+```
+> npm i url-exists-deep
+```
+
 ## Usage
 
 ```javascript
 import urlExists from 'url-exists-deep';
 
-
-const url = 'https://www.google.com';
-const exists = await urlExists(url);
+```
 
 ```
+const url = 'https://www.google.com';
+const exists = await urlExists(url);
+```
+
 
 ## Result
 
