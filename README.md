@@ -20,7 +20,7 @@ import urlExists from 'url-exists-deep';
 
 ```
 
-```
+```javascript
 const url = 'https://www.google.com';
 const exists = await urlExists(url);
 ```
