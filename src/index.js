@@ -1,5 +1,4 @@
 import got from 'got';
-// const request = require('request');
 
 const urlExistsDeep = async (uri, header = {}, method = 'HEAD', timeout = 5000, pool = {}, prevStatus = 0) => {
   let headers = header;
