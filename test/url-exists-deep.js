@@ -46,7 +46,7 @@ describe('Make deep analyze of URL', () => {
           console.log({ error });
           done();
         });
-    });
+    }).timeout(4000);
   });
 
   describe('Returning false for non-existing domain', () => {
