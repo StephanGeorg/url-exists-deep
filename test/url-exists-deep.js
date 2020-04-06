@@ -58,7 +58,7 @@ describe('Make deep analyze of URL', () => {
           done();
         })
         .catch(done);
-    }).timeout(0);
+    }).timeout(4000);
   });
 
   describe('Returning false for a 403 url', () => {
