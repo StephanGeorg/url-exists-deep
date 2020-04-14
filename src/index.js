@@ -32,7 +32,7 @@ const urlExistsDeep = async (uri, header = {}, method = 'HEAD', timeout = 5000, 
     newMethod = 'GET';
   } else if (statusCode === 301 || statusCode === 302) {
     if (!response.headers.location.includes('://')) {
-      checkUrl = `${url.protocol}//${url.host}${response.headers.location}`;
+      checkUrl = `${url.protocol}//${response.headers.location}`;
     } else checkUrl = response.headers.location;
   }
 

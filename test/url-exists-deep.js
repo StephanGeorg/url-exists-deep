@@ -34,6 +34,21 @@ describe('Make deep analyze of URL', () => {
     });
   });
 
+  describe('Follow a redirect and return valid destination URL', () => {
+    it('should follow redirect and return url', (done) => {
+      url = 'https://www.nasa.gov/content/goddard/what-did-hubble-see-on-your-birthday';
+      urlExistsDeep(url)
+        .then((res) => {
+          expect(res).to.have.property('href').and.to.be.equal('https://www.nasa.gov/content/goddard/what-did-hubble-see-on-your-birthday/');
+          done();
+        })
+        .catch((error) => {
+          console.log({ error });
+          done();
+        });
+    });
+  });
+
   describe('Starting a deeper determination if URL exists', () => {
     it('should start deeper request and return url', (done) => {
       url = 'http://targobank.de';
