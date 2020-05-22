@@ -1,7 +1,7 @@
 {
   "name": "url-exists-deep",
   "version": "2.0.7",
-  "description": "A deeper node library to determine if a url exists.",
+  "description": "A deeper determination if an URL exists.",
   "main": "./dist/index.js",
   "scripts": {
     "test": "mocha --require @babel/register",

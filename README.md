@@ -1,9 +1,15 @@
 # url-exists-deep [![npm version](https://badge.fury.io/js/url-exists-deep.svg)](https://badge.fury.io/js/url-exists-deep)
 
-A deeper node library to determine if a url exists.
+A deeper determination if an URL exists.
+
+It tests for:
+
++ Domain available and accessible
++ Url available and accessible
++ Redirect available and accessible
 
 url-exists-deep was developed for performance and accuracy. To check whether a url
-exists or not a HEAD request is sent, because this is much faster then a GET.
+exists and is publicly accessible or not a HEAD request is sent, because this is much faster then a GET.
 Most hosts are responding correct. If the host responses with a 403 Forbidden a GET
 request with User-Agent and Accept header is sent.  
 
