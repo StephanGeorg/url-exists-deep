@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import urlExistsDeep from '../src/index';
 
-describe('Make deep analyze of URL', () => {
+describe('Make successfull analyze of URL', () => {
   let url = '';
 
   describe('Returning a valid URL for (http://www.google.com)', () => {
@@ -32,9 +32,7 @@ describe('Make deep analyze of URL', () => {
           done();
         });
     });
-  });
 
-  describe('Follow a redirect and return valid destination URL', () => {
     it('should follow redirect and return url', (done) => {
       url = 'https://www.nasa.gov/content/goddard/what-did-hubble-see-on-your-birthday';
       urlExistsDeep(url)
@@ -62,8 +60,26 @@ describe('Make deep analyze of URL', () => {
           done();
         });
     }).timeout(4000);
-  });
 
+    it('should start deeper request after 405', (done) => {
+      url = 'https://www.indeed.com';
+      urlExistsDeep(url)
+        .then((res) => {
+          expect(res).to.have.property('href').and.to.be.equal('https://www.indeed.com/');
+          done();
+        })
+        .catch((error) => {
+          console.log('Error', error);
+          console.log({ error });
+          expect(error).to.be.equal(undefined);
+          done();
+        });
+    });
+  });
+});
+
+describe('Make unsuccessfull analyze of URL', () => {
+  let url = '';
   describe('Returning false for non-existing domain', () => {
     it('should catch error', (done) => {
       url = 'http://thisisawrongurltotest.com';
@@ -86,6 +102,19 @@ describe('Make deep analyze of URL', () => {
           // console.log("Response for", url, res);
         })
         .catch(done);
-    });
+    }).timeout(0);
+  });
+
+  describe('Returning false for a 404 url', () => {
+    it('should be false', (done) => {
+      url = 'https://httpstat.us/404';
+      urlExistsDeep(url)
+        .then((res) => {
+          expect(res).to.be.equal(false);
+          done();
+          // console.log("Response for", url, res);
+        })
+        .catch(done);
+    }).timeout(0);
   });
 });

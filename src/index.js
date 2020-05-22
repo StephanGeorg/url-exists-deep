@@ -9,6 +9,7 @@ const urlExistsDeep = async (uri, header = {}, method = 'HEAD', timeout = 5000, 
     followRedirect: false,
     timeout,
     pool,
+    throwHttpErrors: false,
   };
 
   let response;
@@ -19,11 +20,13 @@ const urlExistsDeep = async (uri, header = {}, method = 'HEAD', timeout = 5000, 
   }
 
   const { statusCode, request } = response;
+
+  if (/4\d\d/.test(statusCode) && ![403, 405].includes(statusCode)) return false;
+
   const { url } = request.options;
 
   let checkUrl;
   let newMethod = method;
-  if (/4\d\d/.test(statusCode) && statusCode !== 403) return false;
 
   if (statusCode === 403) {
     if (prevStatus === 403) return false;
