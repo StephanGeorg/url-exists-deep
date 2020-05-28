@@ -105,6 +105,19 @@ describe('Make unsuccessfull analyze of URL', () => {
     }).timeout(0);
   });
 
+  describe('Returning false for a 503 url', () => {
+    it('should be false', (done) => {
+      url = 'https://httpstat.us/503';
+      urlExistsDeep(url)
+        .then((res) => {
+          console.log("Response for", url, res);
+          expect(res).to.be.equal(false);
+          done();
+        })
+        .catch(done);
+    }).timeout(0);
+  });
+
   describe('Returning false for a 404 url', () => {
     it('should be false', (done) => {
       url = 'https://httpstat.us/404';

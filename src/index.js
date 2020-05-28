@@ -21,6 +21,7 @@ const urlExistsDeep = async (uri, header = {}, method = 'HEAD', timeout = 5000, 
 
   const { statusCode, request } = response;
 
+  if (/5\d\d/.test(statusCode)) return false;
   if (/4\d\d/.test(statusCode) && ![403, 405].includes(statusCode)) return false;
 
   const { url } = request.options;
