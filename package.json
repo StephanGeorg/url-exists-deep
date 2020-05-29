@@ -1,6 +1,6 @@
 {
   "name": "url-exists-deep",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "A deeper determination if an URL exists.",
   "main": "./dist/index.js",
   "scripts": {
