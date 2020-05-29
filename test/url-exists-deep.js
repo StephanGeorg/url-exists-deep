@@ -31,7 +31,7 @@ describe('Make successfull analyze of URL', () => {
           console.log({ error });
           done();
         });
-    });
+    }).timeout(0);
 
     it('should follow redirect and return url', (done) => {
       url = 'https://www.nasa.gov/content/goddard/what-did-hubble-see-on-your-birthday';
@@ -60,21 +60,6 @@ describe('Make successfull analyze of URL', () => {
           done();
         });
     }).timeout(4000);
-
-    it('should start deeper request after 405', (done) => {
-      url = 'https://www.indeed.com';
-      urlExistsDeep(url)
-        .then((res) => {
-          expect(res).to.have.property('href').and.to.be.equal('https://www.indeed.com/');
-          done();
-        })
-        .catch((error) => {
-          console.log('Error', error);
-          console.log({ error });
-          expect(error).to.be.equal(undefined);
-          done();
-        });
-    });
   });
 });
 
@@ -105,12 +90,26 @@ describe('Make unsuccessfull analyze of URL', () => {
     }).timeout(0);
   });
 
+  it('should start deeper request after 405', (done) => {
+    url = 'https://httpstat.us/405';
+    urlExistsDeep(url)
+      .then((res) => {
+        expect(res).to.be.equal(false);
+        done();
+      })
+      .catch((error) => {
+        console.log('Error', error);
+        console.log({ error });
+        expect(error).to.be.equal(undefined);
+        done();
+      });
+  });
+
   describe('Returning false for a 503 url', () => {
     it('should be false', (done) => {
       url = 'https://httpstat.us/503';
       urlExistsDeep(url)
         .then((res) => {
-          console.log("Response for", url, res);
           expect(res).to.be.equal(false);
           done();
         })

@@ -20,23 +20,27 @@ const urlExistsDeep = async (uri, header = {}, method = 'HEAD', timeout = 5000, 
   }
 
   const { statusCode, request } = response;
-
-  if (/5\d\d/.test(statusCode)) return false;
-  if (/4\d\d/.test(statusCode) && ![403, 405].includes(statusCode)) return false;
-
   const { url } = request.options;
+  const responseHeaders = response.headers;
+
+  if (/3\d\d/.test(statusCode) && !responseHeaders.location) return false;
+  if (/4\d\d/.test(statusCode) && ![403, 405].includes(statusCode)) return false;
+  if (/5\d\d/.test(statusCode)) return false;
 
   let checkUrl;
   let newMethod = method;
 
-  if (statusCode === 403) {
-    if (prevStatus === 403) return false;
+  if ([403, 405].includes(statusCode)) {
+    if ([403, 405].includes(prevStatus)) return false;
     checkUrl = url.href;
-    headers = { Accept: 'text/html', 'User-Agent': 'Mozilla/5.0' };
+    headers = {
+      Accept: headers.Accept || 'text/html',
+      'User-Agent': headers['User-Agent'] || 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36',
+    };
     newMethod = 'GET';
   } else if (statusCode === 301 || statusCode === 302) {
     if (!response.headers.location.includes('://')) {
-      checkUrl = `${url.protocol}//${response.headers.location}`;
+      checkUrl = `${url.protocol}//${responseHeaders.location}`;
     } else checkUrl = response.headers.location;
   }
 
