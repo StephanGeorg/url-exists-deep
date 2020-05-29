@@ -38,10 +38,10 @@ const urlExistsDeep = async (uri, header = {}, method = 'HEAD', timeout = 5000, 
       'User-Agent': headers['User-Agent'] || 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36',
     };
     newMethod = 'GET';
-  } else if (statusCode === 301 || statusCode === 302) {
-    if (!response.headers.location.includes('://')) {
-      checkUrl = `${url.protocol}//${responseHeaders.location}`;
-    } else checkUrl = response.headers.location;
+  } else if (/3\d\d/.test(statusCode) && responseHeaders.location) {
+    checkUrl = !response.headers.location.includes('://')
+      ? `${url.protocol}//${responseHeaders.location}`
+      : response.headers.location;
   }
 
   if (checkUrl) return urlExistsDeep(checkUrl, headers, newMethod, timeout, pool, statusCode);
