@@ -1,4 +1,4 @@
-# url-exists-deep [![npm version](https://badge.fury.io/js/url-exists-deep.svg)](https://badge.fury.io/js/url-exists-deep)
+# url-exists-deep [![npm version](https://badge.fury.io/js/url-exists-deep.svg)](https://badge.fury.io/js/url-exists-deep) ![Node CI](https://github.com/StephanGeorg/url-exists-deep/workflows/Node%20CI/badge.svg?branch=master&event=push)
 
 A deeper determination if an URL exists.
 
