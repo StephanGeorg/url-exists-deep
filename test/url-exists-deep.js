@@ -103,7 +103,7 @@ describe('Make unsuccessfull analyze of URL', () => {
         expect(error).to.be.equal(undefined);
         done();
       });
-  });
+  }).timeout(0);
 
   describe('Returning false for a 503 url', () => {
     it('should be false', (done) => {
