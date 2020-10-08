@@ -47,7 +47,7 @@ describe('Make successfull analyze of URL', () => {
     });
   });
 
-  describe('Starting a deeper determination if URL exists', () => {
+  /* describe('Starting a deeper determination if URL exists', () => {
     it('should start deeper request and return url', (done) => {
       url = 'http://targobank.de';
       urlExistsDeep(url)
@@ -57,10 +57,10 @@ describe('Make successfull analyze of URL', () => {
         })
         .catch((error) => {
           console.log({ error });
-          done();
+          // done();
         });
     }).timeout(4000);
-  });
+  }); */
 });
 
 describe('Make unsuccessfull analyze of URL', () => {

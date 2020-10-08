@@ -1,6 +1,6 @@
 {
   "name": "url-exists-deep",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "A deeper determination if an URL exists.",
   "main": "./dist/index.js",
   "scripts": {
@@ -9,22 +9,22 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
-    "got": "^10.7.0"
+    "@babel/runtime": "^7.11.2",
+    "got": "^11.7.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-transform-runtime": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-stage-2": "^7.0.0",
-    "@babel/register": "^7.9.0",
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-stage-2": "^7.8.3",
+    "@babel/register": "^7.11.5",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.10.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
-    "mocha": "^7.1.1"
+    "mocha": "^8.1.3"
   },
   "repository": {
     "type": "git",
