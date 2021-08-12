@@ -41,5 +41,5 @@ responses.
 
 ### Rewrites 301
 
-If ```url ``` redirects with 301 url-exists-deep follows the redirect and returns
+If ```url``` redirects with 301 url-exists-deep follows the redirect and returns
 the destination url if exists.
