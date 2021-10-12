@@ -49,3 +49,4 @@ const urlExistsDeep = async (uri, header = {}, method = 'HEAD', timeout = 5000, 
 };
 
 export default urlExistsDeep;
+module.exports = urlExistsDeep;
