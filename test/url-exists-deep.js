@@ -44,7 +44,7 @@ describe('Make successfull analyze of URL', () => {
           console.log({ error });
           done();
         });
-    });
+    }).timeout(0);
   });
 
   /* describe('Starting a deeper determination if URL exists', () => {
