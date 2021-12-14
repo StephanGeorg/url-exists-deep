@@ -3,9 +3,14 @@
   "version": "2.1.1",
   "description": "A deeper determination if an URL exists.",
   "main": "./dist/index.js",
+  "types": "types/index.d.ts",
   "keywords": [
     "url",
     "exists"
+  ],
+  "files": [
+    "dist/",
+    "types/index.d.ts"
   ],
   "author": "Stephan Georg <s.georg@hey.com>",
   "license": "MIT",
@@ -15,7 +20,8 @@
   },
   "homepage": "https://github.com/StephanGeorg/url-exists-deep#readme",
   "scripts": {
-    "test": "mocha --require @babel/register",
+    "test": "npm run types && mocha --require @babel/register",
+    "types": "tsc -p types/tsconfig.json",
     "build": "babel src --presets @babel/preset-env --plugins @babel/plugin-transform-runtime --out-dir dist",
     "prepublish": "npm run build"
   },
@@ -35,6 +41,7 @@
     "eslint": "^8.0.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.25.1",
-    "mocha": "^9.1.2"
+    "mocha": "^9.1.2",
+    "typescript": "^4.5.3"
   }
 }
